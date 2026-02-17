@@ -6,7 +6,7 @@ from pytest_bdd import given, parsers, then, when
 
 from assertions.messaging_assertions import MessagingAssertions
 from data.factories import EventFactory
-from models.events.user_event import UserCreatedEvent
+from models.generated.v1.user_created_event import UserCreatedEvent
 from services.eventhub_service import EventHubService
 from services.kafka_service import KafkaService
 

@@ -1,4 +1,4 @@
-"""Auth request and response DTOs."""
+"""Auth request DTOs."""
 
 from __future__ import annotations
 
@@ -18,12 +18,3 @@ class RefreshRequest(BaseDTO):
     """Payload for POST /auth/refresh."""
 
     refresh_token: str = Field(..., alias="refreshToken")
-
-
-class TokenResponse(BaseDTO):
-    """Expected shape of an authentication token response."""
-
-    access_token: str = Field(..., alias="accessToken")
-    refresh_token: str = Field(..., alias="refreshToken")
-    token_type: str = Field(default="bearer", alias="tokenType")
-    expires_in: int = Field(..., alias="expiresIn")

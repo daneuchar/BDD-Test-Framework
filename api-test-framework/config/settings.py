@@ -36,6 +36,10 @@ class Settings(BaseSettings):
         default="dev",
         description="Target environment",
     )
+    bearer_token: str = Field(
+        default="",
+        description="Pre-configured bearer token (skips login when set)",
+    )
     auth_username: str = Field(
         default="testuser",
         description="Default authentication username",

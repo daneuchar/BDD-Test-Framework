@@ -1,4 +1,4 @@
-"""User request and response DTOs."""
+"""User request DTOs."""
 
 from __future__ import annotations
 
@@ -22,14 +22,3 @@ class UpdateUserRequest(BaseDTO):
     name: str | None = Field(default=None, min_length=1, max_length=255)
     email: EmailStr | None = None
     role: str | None = None
-
-
-class UserResponse(BaseDTO):
-    """Expected shape of a single user in API responses."""
-
-    id: str
-    name: str
-    email: str
-    role: str
-    created_at: str | None = Field(default=None, alias="createdAt")
-    updated_at: str | None = Field(default=None, alias="updatedAt")

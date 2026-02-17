@@ -1,17 +1,28 @@
 from .base_model import BaseDTO
-from .user import CreateUserRequest, UpdateUserRequest, UserResponse
-from .auth import LoginRequest, RefreshRequest, TokenResponse
-from .events import BaseEvent, UserCreatedEvent, UserUpdatedEvent
+from .user import CreateUserRequest, UpdateUserRequest
+from .auth import LoginRequest, RefreshRequest
+from .generated import resolve_model, ModelNotFoundError
+from .generated.v1 import (
+    UserResponse,
+    UserListResponse,
+    LoginResponse,
+    ErrorResponse,
+    UserCreatedEvent,
+    UserUpdatedEvent,
+)
 
 __all__ = [
     "BaseDTO",
     "CreateUserRequest",
     "UpdateUserRequest",
-    "UserResponse",
     "LoginRequest",
     "RefreshRequest",
-    "TokenResponse",
-    "BaseEvent",
+    "resolve_model",
+    "ModelNotFoundError",
+    "UserResponse",
+    "UserListResponse",
+    "LoginResponse",
+    "ErrorResponse",
     "UserCreatedEvent",
     "UserUpdatedEvent",
 ]

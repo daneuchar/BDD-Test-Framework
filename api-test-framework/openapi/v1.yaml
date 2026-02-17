@@ -1,0 +1,196 @@
+openapi: "3.0.3"
+info:
+  title: API Test Framework - V1
+  version: "1.0.0"
+  description: OpenAPI specification for API v1 response schemas.
+
+paths: {}
+
+components:
+  schemas:
+    UserResponse:
+      type: object
+      description: Schema for a single user object returned by the API.
+      required:
+        - id
+        - name
+        - email
+        - role
+      properties:
+        id:
+          type: string
+          minLength: 1
+        name:
+          type: string
+          minLength: 1
+          maxLength: 255
+        email:
+          type: string
+          format: email
+        role:
+          type: string
+          enum:
+            - user
+            - admin
+            - moderator
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    UserListResponse:
+      type: object
+      description: Schema for paginated list of users.
+      required:
+        - data
+        - total
+        - page
+        - size
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/UserResponse"
+        total:
+          type: integer
+          minimum: 0
+        page:
+          type: integer
+          minimum: 1
+        size:
+          type: integer
+          minimum: 1
+
+    LoginResponse:
+      type: object
+      description: Schema for authentication token response.
+      required:
+        - accessToken
+        - refreshToken
+        - tokenType
+        - expiresIn
+      properties:
+        accessToken:
+          type: string
+          minLength: 1
+        refreshToken:
+          type: string
+          minLength: 1
+        tokenType:
+          type: string
+          enum:
+            - bearer
+        expiresIn:
+          type: integer
+          minimum: 1
+
+    ErrorResponse:
+      type: object
+      description: Schema for standard API error responses.
+      required:
+        - error
+        - message
+      properties:
+        error:
+          type: string
+          minLength: 1
+        message:
+          type: string
+          minLength: 1
+        details:
+          type: array
+          items:
+            $ref: "#/components/schemas/ErrorDetail"
+        statusCode:
+          type: integer
+
+    ErrorDetail:
+      type: object
+      description: Individual field-level error detail.
+      required:
+        - field
+        - message
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+
+    UserCreatedEvent:
+      type: object
+      description: Event payload emitted when a user is created.
+      required:
+        - eventId
+        - eventType
+        - timestamp
+        - version
+        - name
+        - email
+        - role
+      properties:
+        eventId:
+          type: string
+          format: uuid
+          minLength: 1
+        eventType:
+          type: string
+          enum:
+            - user.created
+        timestamp:
+          type: string
+          format: date-time
+        version:
+          type: string
+          minLength: 1
+        name:
+          type: string
+          minLength: 1
+          maxLength: 255
+        email:
+          type: string
+          format: email
+        role:
+          type: string
+          enum:
+            - user
+            - admin
+            - moderator
+
+    UserUpdatedEvent:
+      type: object
+      description: Event payload emitted when a user is updated.
+      required:
+        - eventId
+        - eventType
+        - timestamp
+        - version
+      properties:
+        eventId:
+          type: string
+          format: uuid
+          minLength: 1
+        eventType:
+          type: string
+          enum:
+            - user.updated
+        timestamp:
+          type: string
+          format: date-time
+        version:
+          type: string
+          minLength: 1
+        name:
+          type: string
+          minLength: 1
+          maxLength: 255
+        email:
+          type: string
+          format: email
+        role:
+          type: string
+          enum:
+            - user
+            - admin
+            - moderator

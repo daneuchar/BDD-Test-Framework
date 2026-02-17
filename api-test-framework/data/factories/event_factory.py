@@ -3,7 +3,8 @@
 from __future__ import annotations
 
 from models.builders.event_builder import EventBuilder
-from models.events.user_event import UserCreatedEvent, UserUpdatedEvent
+from models.generated.v1.user_created_event import UserCreatedEvent
+from models.generated.v1.user_updated_event import UserUpdatedEvent
 
 from .base_factory import BaseFactory
 

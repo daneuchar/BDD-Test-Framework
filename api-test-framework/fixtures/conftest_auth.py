@@ -13,7 +13,13 @@ from services.auth_service import AuthService
 
 @pytest.fixture(scope="session")
 def auth_token(auth_service: AuthService) -> str:
-    """Session-scoped bearer token obtained via AuthService.login()."""
+    """Session-scoped bearer token.
+
+    Uses ``BEARER_TOKEN`` env var when set, otherwise falls back to
+    obtaining a token via ``AuthService.login()``.
+    """
+    if settings.bearer_token:
+        return settings.bearer_token
     credentials = LoginRequest(
         username=settings.auth_username,
         password=settings.auth_password,

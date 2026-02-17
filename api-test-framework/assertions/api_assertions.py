@@ -17,6 +17,8 @@ from typing import Any
 import allure
 
 from core.client.base_client import APIResponse
+from models.generated import ModelNotFoundError, resolve_model
+from validators.pydantic_validator import PydanticValidator
 from validators.schema_validator import SchemaValidator
 
 
@@ -40,9 +42,18 @@ class ApiAssertions:
         return self
 
     def schema(self, schema_name: str) -> ApiAssertions:
-        """Assert the response body matches the JSON schema *schema_name*."""
+        """Assert the response body matches the schema *schema_name*.
+
+        Uses generated Pydantic models as the primary validation path.
+        Falls back to JSON schema validation if no generated model is
+        registered for the given schema name (migration safety net).
+        """
         with allure.step(f"Assert response matches schema '{schema_name}'"):
-            validator = SchemaValidator(schema_name=schema_name, version=self.version)
+            try:
+                model_cls = resolve_model(schema_name, version=self.version)
+                validator = PydanticValidator(model=model_cls)
+            except ModelNotFoundError:
+                validator = SchemaValidator(schema_name=schema_name, version=self.version)
             result = validator.validate(self.response)
             assert result.is_valid, (
                 f"Schema validation failed: {'; '.join(result.errors)}"

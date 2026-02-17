@@ -21,7 +21,6 @@ class APIVersion(str, Enum):
 class VersionConfig:
     version: APIVersion
     path_prefix: str  # e.g. "api/v1"
-    schema_dir: str  # e.g. "v1"
     endpoint_overrides: Dict[str, str] = field(default_factory=dict)
 
 
@@ -36,12 +35,10 @@ _REGISTRY: Dict[APIVersion, VersionConfig] = {
     APIVersion.V1: VersionConfig(
         version=APIVersion.V1,
         path_prefix="api/v1",
-        schema_dir="v1",
     ),
     APIVersion.V2: VersionConfig(
         version=APIVersion.V2,
         path_prefix="api/v2",
-        schema_dir="v2",
     ),
 }
 

@@ -6,7 +6,8 @@ import allure
 
 from config.endpoints import Endpoints
 from core.client.base_client import APIResponse
-from models.user import CreateUserRequest, UpdateUserRequest, UserResponse
+from models.user import CreateUserRequest, UpdateUserRequest
+from models.generated.v1.user_response import UserResponse
 from services.base_service import BaseService
 
 
