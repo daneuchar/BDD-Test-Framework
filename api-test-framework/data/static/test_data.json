@@ -1,0 +1,27 @@
+{
+  "users": {
+    "default_admin": {
+      "name": "Admin User",
+      "email": "admin@example.com",
+      "password": "Adm!nP@ss123",
+      "role": "admin"
+    },
+    "default_user": {
+      "name": "Regular User",
+      "email": "user@example.com",
+      "password": "Us3rP@ss123",
+      "role": "user"
+    }
+  },
+  "auth": {
+    "valid_credentials": {
+      "username": "testuser",
+      "password": "P@ssw0rd123"
+    }
+  },
+  "pagination": {
+    "default_page": 1,
+    "default_size": 10,
+    "max_size": 100
+  }
+}

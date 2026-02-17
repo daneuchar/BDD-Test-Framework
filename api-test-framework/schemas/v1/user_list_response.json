@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UserListResponse",
+  "description": "Schema for paginated list of users.",
+  "type": "object",
+  "required": ["data", "total", "page", "size"],
+  "additionalProperties": false,
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": {
+        "$ref": "user_response.json"
+      }
+    },
+    "total": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "page": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "size": {
+      "type": "integer",
+      "minimum": 1
+    }
+  }
+}
