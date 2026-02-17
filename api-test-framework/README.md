@@ -39,8 +39,13 @@ Step definitions are thin glue code. Business logic lives in service objects.
 ## Setup
 
 ```bash
-# Clone and install
-pip install -e .
+# Create and activate virtual environment
+python -m venv .venv
+source .venv/bin/activate   # macOS / Linux
+# .venv\Scripts\activate    # Windows
+
+# Install the framework and dev dependencies
+pip install -e ".[dev]"
 
 # Copy and configure environment
 cp .env.example .env
